@@ -33,7 +33,7 @@ def suit_co_align_fd_imgs(search_fold,filter_name,add_logos,batch_size=10,rate=3
     print(f'Searching for {filter_name} images in {search_fold} folder')
     #print('Path: ',os.getcwd())
     base_fold=os.getcwd()
-    Fetch and sort files
+    #Fetch and sort files
     files = get_sorted_files(search_fold, filter_name)
     if test_mode:
         files=files[start_idx:end_idx]
