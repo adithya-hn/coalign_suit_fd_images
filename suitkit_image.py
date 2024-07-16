@@ -77,13 +77,13 @@ def get_submap(ref_img):
     #top_right = SkyCoord(550 * u.arcsec, 1050 * u.arcsec, frame=ref_img.coordinate_frame)
     #bottom_left = SkyCoord(-700 * u.arcsec, 850 * u.arcsec, frame=ref_img.coordinate_frame)
     center_coord = SkyCoord(0 * u.arcsec, 950* u.arcsec, frame=ref_img.coordinate_frame) #54,157
-    width = 1100 * u.arcsec
-    height =300 * u.arcsec   
+    width = 1300 * u.arcsec
+    height =200 * u.arcsec   
     
     ref_img.meta.update({'CROTA2':0})
     #print('rot',ref_img.meta.get('CROTA2')) 
     offset_frame = SkyOffsetFrame(origin=center_coord, rotation=0*u.deg)
-    rectangle = SkyCoord(lon=[-1/2, 1/2] * width, lat=[-1/2, 1/2] * height, frame=offset_frame)
+    rectangle = SkyCoord(lon=[-1/2, 1/3] * width, lat=[-1/2, 1/2] * height, frame=offset_frame)
     ref_submap = ref_img.submap(rectangle) #bottom_left, top_right=top_right)
     
     fig = plt.figure()
@@ -182,9 +182,9 @@ def save_image(aligned_img, add_logos, fl_nm):
     if add_logos == 1:
         logo_paths = {
             #Picking Up Relevant Logos.
-            "logo1": '/assets/suit_white.png',
-            "logo2": '/assets/sun_iucaa.png',
-            "logo3": '/assets/iucaaisro.png'
+            "logo1": 'assets/suit_white.png',
+            "logo2": 'assets/sun_iucaa.png',
+            "logo3": 'assets/iucaaisro.png'
         }
         logo_image3 = Image.open(logo_paths['logo3'])  # suit_logo, top left
         logo_image2 = Image.open(logo_paths['logo2'])  # sun at iucaa top right
