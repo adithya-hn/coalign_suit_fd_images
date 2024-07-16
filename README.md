@@ -41,16 +41,16 @@ suit_co_align_fd_imgs.main(
     batch_size=10,      # Optional: Number of Images to be used for aligngs / default is 10
     rate=30,            # Optional: Frame rate for Output video. [fps]
     ref_idx=0,          # Optional: Template index in the sorted array for cross-correlation
-    Test_mode=False,    # Optional: If True, processes a slice of the array for testing
+    test_mode=False,    # Optional: If True, processes a slice of the array for testing
     start_idx=0,        # Optional: Start index for test mode
     end_idx=11          # Optional: End index for test mode
 )
 ```
 
 ### Authors
-- Adithya H. N. (@adithya-hn)
-- Sreejith Padinhatteeri (@sreejithpa)
-- Atul Bhat (@atulbhats)
+- Adithya H. N. (@adithya-hn) - *PhD Scholar Manipal Centre for Natural Sciences,MAHE, Manipal*
+- Sreejith Padinhatteeri (@sreejithpa) - *Assistant Professor Manipal Centre for Natural Sciences,MAHE, Manipal*
+- Atul Bhat (@atulbhats) -*PhD Scholar Manipal Centre for Natural Sciences,MAHE, Manipal*
 
 ### Contact
 - [adithyabhattsringeri@gmail.com](mailto:adithyabhattsringeri@gmail.com)
