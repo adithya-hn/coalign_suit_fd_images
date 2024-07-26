@@ -11,12 +11,6 @@ This package is designed to co-align SUIT 2k images using the image cross-correl
   - Movies for PR purposes.
   - CSV file of shift values applied for each image.
   - Option to produce aligned FITS images.
-#### **Under Development**: 
-- Co-alignment for ROIs (Region of Interests) will be added soon.
-- Flux conserved Image Rotation
-- Drift correction for ROIs
-- NB03 Difference movie
-- Compare L1 images to Earth observer frame
 
 ## Installation
 
