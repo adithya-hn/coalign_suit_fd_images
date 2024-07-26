@@ -101,10 +101,11 @@ def create_directories(fl_date,Save_fits):
     jpg_fold = f'{fol_nm}/FD_imgs'
     video_fold=f'{base_fold}/Website_Movies'
     algn_dir = f'{fol_nm}/Aligned_Fits'
+    log_fold=f'{base_fold}/Drift_log'
     
     pathlib.Path(jpg_fold).mkdir(parents=True, exist_ok=True)
-    
     pathlib.Path(video_fold).mkdir(parents=True, exist_ok=True)
+    pathlib.Path(log_fold).mkdir(parents=True, exist_ok=True)
     if Save_fits:
         pathlib.Path(algn_dir).mkdir(parents=True, exist_ok=True)
 
@@ -215,13 +216,13 @@ def save_image(aligned_img, add_logos, fl_nm):
 def save_results(fl_date, o_x, o_y, o_d, x_arry, y_arry, aln_imgs):
     data = np.column_stack((aln_imgs, o_d, x_arry, y_arry, o_x, o_y))
     months = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-    output_file = f'{base_fold}/{months[int(fl_date.month)]}{str(fl_date.day).zfill(2)}_1.1fits_Jitter_shift.csv'
+    output_file = f'{log_fold}/{months[int(fl_date.month)]}{str(fl_date.day).zfill(2)}_1.1fits_Jitter_shift.csv'
     np.savetxt(output_file, data, delimiter=',', header='File names, Date, delX, delY, CR-X, CR-Y', fmt='%s')
 
 def create_movie(jpg_fold, fl_date,rate=30):
     months = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
     dat_dir=jpg_fold+'/'
-    shiftFile=f'{base_fold}/'+f'{months[int(fl_date.month)]}{str(fl_date.day).zfill(2)}_1.1fits_Jitter_shift.csv'
+    shiftFile=f'{log_fold}/'+f'{months[int(fl_date.month)]}{str(fl_date.day).zfill(2)}_1.1fits_Jitter_shift.csv'
     ImagesToMovie_pkg.Filter_imgs(shiftFile,dat_dir)
     movie_name = f'{base_fold}/Website_Movies/{months[int(fl_date.month)]}{str(fl_date.day).zfill(2)}_1.1_movie.mp4'
     ImagesToMovie_pkg.Make_movie(jpg_fold, movie_name, rate)
