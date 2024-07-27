@@ -77,23 +77,21 @@ def get_submap(ref_img):
     #top_right = SkyCoord(550 * u.arcsec, 1050 * u.arcsec, frame=ref_img.coordinate_frame)
     #bottom_left = SkyCoord(-700 * u.arcsec, 850 * u.arcsec, frame=ref_img.coordinate_frame)
     center_coord = SkyCoord(0 * u.arcsec, 950* u.arcsec, frame=ref_img.coordinate_frame) #54,157
-    width = 1300 * u.arcsec
-    height =200 * u.arcsec   
+    width = 1100 * u.arcsec
+    height =300 * u.arcsec   
     
-    ref_img.meta.update({'CROTA2':0})
+    #ref_img.meta.update({'CROTA2':0})
     #print('rot',ref_img.meta.get('CROTA2')) 
     offset_frame = SkyOffsetFrame(origin=center_coord, rotation=0*u.deg)
-    rectangle = SkyCoord(lon=[-1/2, 1/3] * width, lat=[-1/2, 1/2] * height, frame=offset_frame)
+    rectangle = SkyCoord(lon=[-1/2, 1/2] * width, lat=[-1/2, 1/2] * height, frame=offset_frame)
     ref_submap = ref_img.submap(rectangle) #bottom_left, top_right=top_right)
     
     fig = plt.figure()
     ax = fig.add_subplot(111, projection=ref_submap)
     ref_submap.plot(axes=ax)
-    
     plt.savefig('Template.jpg')
     #plt.show()
     plt.close()
-    
     return ref_submap
 
 def create_directories(fl_date,Save_fits):
@@ -216,15 +214,15 @@ def save_image(aligned_img, add_logos, fl_nm):
 def save_results(fl_date, o_x, o_y, o_d, x_arry, y_arry, aln_imgs):
     data = np.column_stack((aln_imgs, o_d, x_arry, y_arry, o_x, o_y))
     months = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-    output_file = f'{log_fold}/{months[int(fl_date.month)]}{str(fl_date.day).zfill(2)}_1.1fits_Jitter_shift.csv'
+    output_file = f'{log_fold}/{months[int(fl_date.month)]}{str(fl_date.day).zfill(2)}_l1fits_Drift_shift.csv'
     np.savetxt(output_file, data, delimiter=',', header='File names, Date, delX, delY, CR-X, CR-Y', fmt='%s')
 
 def create_movie(jpg_fold, fl_date,rate=30):
     months = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
     dat_dir=jpg_fold+'/'
-    shiftFile=f'{log_fold}/'+f'{months[int(fl_date.month)]}{str(fl_date.day).zfill(2)}_1.1fits_Jitter_shift.csv'
+    shiftFile=f'{log_fold}/'+f'{months[int(fl_date.month)]}{str(fl_date.day).zfill(2)}_l1fits_Drift_shift.csv'
     ImagesToMovie_pkg.Filter_imgs(shiftFile,dat_dir)
-    movie_name = f'{base_fold}/Website_Movies/{months[int(fl_date.month)]}{str(fl_date.day).zfill(2)}_1.1_movie.mp4'
+    movie_name = f'{base_fold}/Website_Movies/{months[int(fl_date.month)]}{str(fl_date.day).zfill(2)}_l1_movie.mp4'
     ImagesToMovie_pkg.Make_movie(jpg_fold, movie_name, rate)
 
 if __name__ == "__main__":
